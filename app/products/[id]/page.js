@@ -11,6 +11,53 @@ import {
 import { getProductById, getBadgeStyle, categories, products, currency } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
 import ProductCard from "@/components/ProductCard";
+import { useState } from "react";
+
+function ProductDetailImage({ src, alt, icon, badge, badgeColor }) {
+  const [imgError, setImgError] = useState(false);
+  const showImage = src && !imgError;
+
+  return (
+    <div className="relative rounded-3xl h-80 lg:h-[480px] overflow-hidden border border-gray-100">
+      {showImage ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={src}
+          alt={alt}
+          onError={() => setImgError(true)}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+          <div className="absolute inset-0 opacity-5">
+            {[...Array(12)].map((_, i) => (
+              <div key={i} className="absolute border-b border-gray-400" style={{ top: `${(i + 1) * 8}%`, left: 0, right: 0 }} />
+            ))}
+            {[...Array(10)].map((_, i) => (
+              <div key={i} className="absolute border-r border-gray-400" style={{ left: `${(i + 1) * 10}%`, top: 0, bottom: 0 }} />
+            ))}
+          </div>
+          <div className="relative text-center">
+            <div className="text-8xl mb-4">{icon || "📊"}</div>
+            <div className="flex items-center gap-2 justify-center bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm">
+              <FileSpreadsheet size={14} className="text-emerald-500" />
+              <span className="text-xs font-medium text-gray-700">ملف .xlsx</span>
+            </div>
+          </div>
+        </div>
+      )}
+      {badge && (
+        <span className={`absolute top-5 right-5 z-10 text-xs font-semibold px-3 py-1.5 rounded-full ${getBadgeStyle(badgeColor)}`}>
+          {badge}
+        </span>
+      )}
+      <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm">
+        <FileSpreadsheet size={14} className="text-emerald-500" />
+        <span className="text-xs font-medium text-gray-700">ملف .xlsx</span>
+      </div>
+    </div>
+  );
+}
 
 export default function ProductPage() {
   const params = useParams();
@@ -38,44 +85,13 @@ export default function ProductPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
         {/* Left — visual */}
-        <div className="relative rounded-3xl h-80 lg:h-[480px] overflow-hidden border border-gray-100">
-          {product.image ? (
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              className="object-cover"
-              priority
-            />
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-              <div className="absolute inset-0 opacity-5">
-                {[...Array(12)].map((_, i) => (
-                  <div key={i} className="absolute border-b border-gray-400" style={{ top: `${(i + 1) * 8}%`, left: 0, right: 0 }} />
-                ))}
-                {[...Array(10)].map((_, i) => (
-                  <div key={i} className="absolute border-r border-gray-400" style={{ left: `${(i + 1) * 10}%`, top: 0, bottom: 0 }} />
-                ))}
-              </div>
-              <div className="relative text-center">
-                <div className="text-8xl mb-4">{product.icon || "📊"}</div>
-                <div className="flex items-center gap-2 justify-center bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm">
-                  <FileSpreadsheet size={14} className="text-emerald-500" />
-                  <span className="text-xs font-medium text-gray-700">ملف .xlsx</span>
-                </div>
-              </div>
-            </div>
-          )}
-          {product.badge && (
-            <span className={`absolute top-5 right-5 z-10 text-xs font-semibold px-3 py-1.5 rounded-full ${getBadgeStyle(product.badgeColor)}`}>
-              {product.badge}
-            </span>
-          )}
-          <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm">
-            <FileSpreadsheet size={14} className="text-emerald-500" />
-            <span className="text-xs font-medium text-gray-700">ملف .xlsx</span>
-          </div>
-        </div>
+        <ProductDetailImage
+          src={product.image}
+          alt={product.name}
+          icon={product.icon}
+          badge={product.badge}
+          badgeColor={product.badgeColor}
+        />
 
         {/* Right — details */}
         <div>

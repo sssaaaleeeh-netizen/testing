@@ -1,9 +1,40 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { Star, ShoppingCart, Download } from "lucide-react";
 import { getBadgeStyle, currency } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
+import { useState } from "react";
+
+function ProductImage({ src, alt, icon }) {
+  const [imgError, setImgError] = useState(false);
+  const showImage = src && !imgError;
+
+  return (
+    <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 h-48 flex items-center justify-center overflow-hidden">
+      {showImage ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={src}
+          alt={alt}
+          onError={() => setImgError(true)}
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      ) : (
+        <>
+          <div className="absolute inset-0 opacity-5">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="absolute border-b border-gray-400" style={{ top: `${(i + 1) * 16}%`, left: 0, right: 0 }} />
+            ))}
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="absolute border-r border-gray-400" style={{ left: `${(i + 1) * 12}%`, top: 0, bottom: 0 }} />
+            ))}
+          </div>
+          <div className="relative z-10 text-5xl">{icon || "📊"}</div>
+        </>
+      )}
+    </div>
+  );
+}
 
 export default function ProductCard({ product }) {
   const { addToCart, isInCart } = useCart();
@@ -12,34 +43,8 @@ export default function ProductCard({ product }) {
   return (
     <div className="group bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden">
       {/* Card top visual */}
-      <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 h-48 flex items-center justify-center overflow-hidden">
-        {product.image ? (
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-            onError={(e) => { e.target.style.display = "none"; }}
-          />
-        ) : (
-          <>
-            <div className="absolute inset-0 opacity-5">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="absolute border-b border-gray-400" style={{ top: `${(i + 1) * 16}%`, left: 0, right: 0 }} />
-              ))}
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="absolute border-r border-gray-400" style={{ left: `${(i + 1) * 12}%`, top: 0, bottom: 0 }} />
-              ))}
-            </div>
-            <div className="relative z-10 text-5xl">{product.icon || "📊"}</div>
-          </>
-        )}
-
-        {/* Overlay gradient on images */}
-        {product.image && (
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-        )}
-
+      <div className="relative">
+        <ProductImage src={product.image} alt={product.name} icon={product.icon} />
         {product.badge && (
           <span className={`absolute top-3 right-3 z-10 text-xs font-semibold px-2.5 py-1 rounded-full ${getBadgeStyle(product.badgeColor)}`}>
             {product.badge}
