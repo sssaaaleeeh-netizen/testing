@@ -16,7 +16,7 @@ const ALL_IDS = [
   "freelancer-tools",
   "vat-tax-planning",
   "retirement-fire-planner",
-  "investment-portfolio",
+  "real-estate-analysis",
 ];
 
 const CARD_W = 248;
