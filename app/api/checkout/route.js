@@ -1,43 +1,37 @@
 import { NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { createPayment } from "@/lib/moyasar";
 
 export async function POST(req) {
   try {
     const { items } = await req.json();
 
     if (!items || items.length === 0) {
-      return NextResponse.json({ error: "No items in cart" }, { status: 400 });
+      return NextResponse.json({ error: "السلة فارغة" }, { status: 400 });
     }
 
-    const lineItems = items.map((item) => ({
-      price_data: {
-        currency: "usd",
-        product_data: {
-          name: item.name,
-          description: item.description || "",
-          metadata: { productId: item.id },
-        },
-        unit_amount: Math.round(item.price * 100),
-      },
-      quantity: 1,
-    }));
-
+    const totalSAR = items.reduce((sum, item) => sum + item.price, 0);
+    const description = items.map((i) => i.name).join(" + ");
+    const productIds = items.map((i) => i.id).join(",");
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items: lineItems,
-      mode: "payment",
-      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/cart`,
-      metadata: {
-        productIds: items.map((i) => i.id).join(","),
-      },
+    const payment = await createPayment({
+      amountSAR: totalSAR,
+      description,
+      callbackUrl: `${baseUrl}/success`,
+      productIds,
     });
 
-    return NextResponse.json({ url: session.url });
+    // Moyasar returns the redirect URL in source.transaction_url
+    const redirectUrl = payment?.source?.transaction_url;
+
+    if (!redirectUrl) {
+      console.error("Moyasar payment creation failed:", payment);
+      return NextResponse.json({ error: "فشل إنشاء الدفع" }, { status: 500 });
+    }
+
+    return NextResponse.json({ url: redirectUrl });
   } catch (err) {
-    console.error("Stripe checkout error:", err);
-    return NextResponse.json({ error: "Checkout failed" }, { status: 500 });
+    console.error("Checkout error:", err);
+    return NextResponse.json({ error: "حدث خطأ في الدفع" }, { status: 500 });
   }
 }

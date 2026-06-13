@@ -92,12 +92,12 @@ export default function CheckoutPage() {
           <div className="bg-white border border-gray-100 rounded-2xl p-7">
             <div className="flex items-center gap-3 mb-6 text-sm text-gray-600 bg-blue-50 border border-blue-100 rounded-xl p-4">
               <Lock size={15} className="text-blue-500 flex-shrink-0" />
-              <span>ستُحوَّل بأمان إلى Stripe لإتمام عملية الدفع.</span>
+              <span>ستُحوَّل بأمان إلى Moyasar لإتمام عملية الدفع.</span>
             </div>
 
             <div className="space-y-3 mb-8 text-sm text-gray-600">
               {[
-                "نقبل: Visa, Mastercard, Amex والمزيد",
+                "نقبل: مدى، Visa، Mastercard، Apple Pay، STC Pay",
                 "تشفير SSL بـ 256 بت",
                 "لا نحتفظ ببيانات بطاقتك على خوادمنا",
                 "تحميل فوري بعد نجاح الدفع",
@@ -127,7 +127,7 @@ export default function CheckoutPage() {
               {loading ? (
                 <>
                   <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
-                  جارٍ التحويل إلى Stripe...
+                  جارٍ التحويل إلى Moyasar...
                 </>
               ) : (
                 <>

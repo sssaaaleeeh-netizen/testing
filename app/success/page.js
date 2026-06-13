@@ -3,17 +3,42 @@ export const dynamic = "force-dynamic";
 import { useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { CheckCircle, Download, Mail, ArrowLeft } from "lucide-react";
+import { CheckCircle, Download, Mail, ArrowLeft, XCircle } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
-  const sessionId = searchParams.get("session_id");
+  const status = searchParams.get("status");   // Moyasar: "paid" | "failed"
+  const paymentId = searchParams.get("id");    // Moyasar: payment ID
   const { clearCart } = useCart();
 
+  const isPaid = status === "paid";
+
   useEffect(() => {
-    clearCart();
-  }, []);
+    if (isPaid) clearCart();
+  }, [isPaid]);
+
+  if (!isPaid) {
+    return (
+      <div className="max-w-xl mx-auto px-4 sm:px-6 py-20 text-center">
+        <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-8">
+          <XCircle size={40} className="text-red-500" />
+        </div>
+        <h1 className="text-2xl font-bold text-gray-900 mb-3">لم تتم عملية الدفع</h1>
+        <p className="text-gray-500 text-sm mb-8 leading-relaxed">
+          {status === "failed"
+            ? "فشلت عملية الدفع. يرجى التحقق من بيانات بطاقتك والمحاولة مجدداً."
+            : "تم إلغاء عملية الدفع. يمكنك المحاولة مجدداً في أي وقت."}
+        </p>
+        <Link
+          href="/cart"
+          className="inline-flex items-center gap-2 bg-gray-900 text-white px-7 py-3.5 rounded-xl text-sm font-semibold hover:bg-gray-700 transition-colors"
+        >
+          العودة للسلة والمحاولة مجدداً <ArrowLeft size={16} />
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-20 text-center">
@@ -26,7 +51,6 @@ function SuccessContent() {
         شكراً لك على شرائك. أدوات الإكسل الخاصة بك جاهزة للتحميل. كما أرسلنا لك بريداً إلكترونياً يتضمن روابط التحميل.
       </p>
 
-      {/* Steps */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 text-right">
         {[
           {
@@ -53,9 +77,9 @@ function SuccessContent() {
         ))}
       </div>
 
-      {sessionId && (
+      {paymentId && (
         <p className="text-xs text-gray-400 mb-8">
-          رقم الطلب: <span className="font-mono">{sessionId}</span>
+          رقم الطلب: <span className="font-mono">{paymentId}</span>
         </p>
       )}
 

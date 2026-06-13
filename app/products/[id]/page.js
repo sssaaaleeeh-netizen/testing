@@ -149,7 +149,7 @@ export default function ProductPage() {
 
           <p className="text-xs text-gray-400 mt-3 flex items-center gap-1.5">
             <Download size={12} />
-            تحميل فوري بعد الدفع · دفع آمن عبر Stripe
+            تحميل فوري بعد الدفع · دفع آمن عبر Moyasar
           </p>
         </div>
       </div>
