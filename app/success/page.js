@@ -84,8 +84,7 @@ function SuccessContent() {
             {products.map(product => (
               <a
                 key={product.id}
-                href={`/downloads/${product.id}.xlsx`}
-                download
+                href={`/api/download?product=${product.id}&payment=${paymentId}`}
                 className="flex items-center justify-between gap-4 bg-white border border-gray-100 hover:border-emerald-200 hover:shadow-md rounded-2xl p-5 transition-all group text-right"
               >
                 <div className="flex items-center gap-4">
