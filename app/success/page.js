@@ -1,23 +1,39 @@
 "use client";
 export const dynamic = "force-dynamic";
-import { useEffect, Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { CheckCircle, Download, Mail, ArrowLeft, XCircle } from "lucide-react";
+import { CheckCircle, Download, ArrowLeft, XCircle, Loader2, FileSpreadsheet } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { getProductById } from "@/lib/products";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
-  const status = searchParams.get("status");   // Moyasar: "paid" | "failed"
-  const paymentId = searchParams.get("id");    // Moyasar: payment ID
+  const status = searchParams.get("status");
+  const paymentId = searchParams.get("id");
   const { clearCart } = useCart();
+
+  const [productIds, setProductIds] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const isPaid = status === "paid";
 
   useEffect(() => {
-    if (isPaid) clearCart();
-  }, [isPaid]);
+    if (!isPaid) { setLoading(false); return; }
+    clearCart();
 
+    if (!paymentId) { setLoading(false); return; }
+
+    fetch(`/api/payment?id=${paymentId}`)
+      .then(r => r.json())
+      .then(data => {
+        if (data.productIds) setProductIds(data.productIds);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [isPaid, paymentId]);
+
+  // ─── Failed Payment ───────────────────────────────────────────
   if (!isPaid) {
     return (
       <div className="max-w-xl mx-auto px-4 sm:px-6 py-20 text-center">
@@ -40,42 +56,67 @@ function SuccessContent() {
     );
   }
 
+  // ─── Success Page ─────────────────────────────────────────────
+  const products = productIds.map(id => getProductById(id)).filter(Boolean);
+
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-20 text-center">
-      <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-8">
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-16 text-center">
+      {/* Icon */}
+      <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
         <CheckCircle size={40} className="text-emerald-500" />
       </div>
 
       <h1 className="text-3xl font-bold text-gray-900 mb-3">تمّت عملية الدفع بنجاح!</h1>
-      <p className="text-gray-500 text-base mb-10 leading-relaxed">
-        شكراً لك على شرائك. أدوات الإكسل الخاصة بك جاهزة للتحميل. كما أرسلنا لك بريداً إلكترونياً يتضمن روابط التحميل.
+      <p className="text-gray-500 text-sm mb-10 leading-relaxed">
+        شكراً لثقتك — أدواتك جاهزة للتحميل الفوري أدناه.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 text-right">
-        {[
-          {
-            icon: <CheckCircle size={20} className="text-emerald-500" />,
-            title: "١. تأكيد الدفع",
-            desc: "تمّت معالجة دفعتك بنجاح.",
-          },
-          {
-            icon: <Mail size={20} className="text-blue-500" />,
-            title: "٢. إرسال البريد",
-            desc: "تحقق من بريدك الإلكتروني لروابط التحميل.",
-          },
-          {
-            icon: <Download size={20} className="text-violet-500" />,
-            title: "٣. تحميل واستخدام",
-            desc: "افتح الملف بإكسل وابدأ فوراً.",
-          },
-        ].map((step) => (
-          <div key={step.title} className="bg-white border border-gray-100 rounded-2xl p-5">
-            <div className="mb-3">{step.icon}</div>
-            <div className="font-semibold text-sm text-gray-900 mb-1">{step.title}</div>
-            <div className="text-xs text-gray-500">{step.desc}</div>
+      {/* Download Section */}
+      {loading ? (
+        <div className="flex items-center justify-center gap-2 text-gray-400 py-10">
+          <Loader2 size={20} className="animate-spin" />
+          <span className="text-sm">جارٍ تجهيز الملفات...</span>
+        </div>
+      ) : products.length > 0 ? (
+        <div className="mb-10">
+          <h2 className="text-lg font-bold text-gray-900 mb-5 text-right">ملفاتك جاهزة للتحميل</h2>
+          <div className="flex flex-col gap-3">
+            {products.map(product => (
+              <a
+                key={product.id}
+                href={`/downloads/${product.id}.xlsx`}
+                download
+                className="flex items-center justify-between gap-4 bg-white border border-gray-100 hover:border-emerald-200 hover:shadow-md rounded-2xl p-5 transition-all group text-right"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center flex-shrink-0 border border-emerald-100 group-hover:bg-emerald-100 transition-colors">
+                    <FileSpreadsheet size={22} className="text-emerald-600" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900 text-sm">{product.name}</div>
+                    <div className="text-xs text-gray-400 mt-0.5">ملف Excel — .xlsx</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-colors flex-shrink-0">
+                  <Download size={14} />
+                  تحميل
+                </div>
+              </a>
+            ))}
           </div>
-        ))}
-      </div>
+          <p className="text-xs text-gray-400 mt-5">
+            ⚠️ احتفظ بهذه الروابط — الملفات متاحة مباشرةً بعد الدفع.
+          </p>
+        </div>
+      ) : (
+        /* Fallback if productIds couldn't be fetched */
+        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-10 text-right">
+          <div className="font-semibold text-amber-800 text-sm mb-1">الملفات ستُرسَل لبريدك الإلكتروني</div>
+          <div className="text-xs text-amber-600">
+            رقم الطلب: <span className="font-mono">{paymentId}</span>
+          </div>
+        </div>
+      )}
 
       {paymentId && (
         <p className="text-xs text-gray-400 mb-8">
@@ -92,7 +133,7 @@ function SuccessContent() {
         </Link>
         <Link
           href="/"
-          className="flex items-center gap-2 border border-gray-200 text-gray-600 px-7 py-3.5 rounded-xl text-sm font-medium hover:border-gray-400 hover:text-gray-900 transition-all"
+          className="flex items-center gap-2 border border-gray-200 text-gray-600 px-7 py-3.5 rounded-xl text-sm font-medium hover:border-gray-400 transition-all"
         >
           الذهاب للرئيسية
         </Link>
