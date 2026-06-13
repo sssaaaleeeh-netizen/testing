@@ -115,12 +115,13 @@ export default function MarketingBanner() {
         </Link>
       </div>
 
-      {/* Single infinite scrolling row — LTR layout to keep animation predictable */}
+      {/* Single infinite scrolling row — force LTR so overflow hides on the right */}
       <div
         className="banner-row"
         style={{
           overflow: "hidden",
           height: CARD_H,
+          direction: "ltr",
           WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)",
           maskImage:       "linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)",
         }}
