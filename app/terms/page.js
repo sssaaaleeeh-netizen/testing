@@ -1,26 +1,26 @@
-export const metadata = { title: "Terms of Service — Seedaal" };
+export const metadata = { title: "شروط الخدمة — سيدال" };
 
 export default function TermsPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">Terms of Service</h1>
-      <p className="text-sm text-gray-400 mb-10">Last updated: June 2025</p>
+      <h1 className="text-3xl font-bold text-gray-900 mb-2">شروط الخدمة</h1>
+      <p className="text-sm text-gray-400 mb-10">آخر تحديث: يونيو 2025</p>
       <div className="space-y-6 text-sm text-gray-600 leading-relaxed">
         <section>
-          <h2 className="text-base font-semibold text-gray-900 mb-2">License</h2>
-          <p>When you purchase a product from Seedaal, you receive a single-user license. You may use the file for your personal or business use. You may not resell, redistribute, or share the file with others who have not purchased it.</p>
+          <h2 className="text-base font-semibold text-gray-900 mb-2">الترخيص</h2>
+          <p>عند شراء منتج من سيدال، تحصل على ترخيص لمستخدم واحد. يمكنك استخدام الملف للاستخدام الشخصي أو التجاري. لا يجوز لك إعادة بيع الملف أو توزيعه أو مشاركته مع أشخاص لم يشتروه.</p>
         </section>
         <section>
-          <h2 className="text-base font-semibold text-gray-900 mb-2">Intellectual Property</h2>
-          <p>All products, designs, and content on this site are owned by Seedaal. Unauthorized reproduction or distribution is prohibited.</p>
+          <h2 className="text-base font-semibold text-gray-900 mb-2">الملكية الفكرية</h2>
+          <p>جميع المنتجات والتصاميم والمحتويات على هذا الموقع مملوكة لسيدال. يُحظر النسخ أو التوزيع غير المصرح به.</p>
         </section>
         <section>
-          <h2 className="text-base font-semibold text-gray-900 mb-2">Disclaimer</h2>
-          <p>Our tools are provided as-is. While we make every effort to ensure accuracy, we are not liable for any financial or business decisions made based on data entered into our spreadsheets.</p>
+          <h2 className="text-base font-semibold text-gray-900 mb-2">إخلاء المسؤولية</h2>
+          <p>تُقدَّم أدواتنا كما هي. بينما نبذل قصارى جهدنا لضمان الدقة، لسنا مسؤولين عن أي قرارات مالية أو تجارية تُتخذ بناءً على البيانات المدخلة في جداول البيانات الخاصة بنا.</p>
         </section>
         <section>
-          <h2 className="text-base font-semibold text-gray-900 mb-2">Contact</h2>
-          <p>Questions? Email <a href="mailto:hello@seedaal.com" className="text-gray-900 underline">hello@seedaal.com</a>.</p>
+          <h2 className="text-base font-semibold text-gray-900 mb-2">تواصل معنا</h2>
+          <p>للاستفسارات: <a href="mailto:hello@seedaal.com" className="text-gray-900 underline">hello@seedaal.com</a>.</p>
         </section>
       </div>
     </div>

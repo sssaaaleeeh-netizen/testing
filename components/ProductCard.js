@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Star, ShoppingCart, Download } from "lucide-react";
-import { getBadgeStyle } from "@/lib/products";
+import { getBadgeStyle, currency } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
 
 export default function ProductCard({ product }) {
@@ -22,7 +22,7 @@ export default function ProductCard({ product }) {
         </div>
         <div className="relative z-10 text-5xl">{product.icon || "📊"}</div>
         {product.badge && (
-          <span className={`absolute top-3 right-3 text-xs font-semibold px-2.5 py-1 rounded-full ${getBadgeStyle(product.badgeColor)}`}>
+          <span className={`absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full ${getBadgeStyle(product.badgeColor)}`}>
             {product.badge}
           </span>
         )}
@@ -33,7 +33,7 @@ export default function ProductCard({ product }) {
         <div className="flex items-center gap-1 mb-2">
           <Star size={12} className="text-amber-400 fill-amber-400" />
           <span className="text-xs font-medium text-gray-700">{product.rating}</span>
-          <span className="text-xs text-gray-400">({product.reviews} reviews)</span>
+          <span className="text-xs text-gray-400">({product.reviews} تقييم)</span>
         </div>
 
         <Link href={`/products/${product.id}`}>
@@ -49,9 +49,9 @@ export default function ProductCard({ product }) {
         {/* Price & CTA */}
         <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-50">
           <div className="flex items-baseline gap-1.5">
-            <span className="text-lg font-bold text-gray-900">${product.price}</span>
+            <span className="text-lg font-bold text-gray-900">{product.price} {currency}</span>
             {product.originalPrice && (
-              <span className="text-xs text-gray-400 line-through">${product.originalPrice}</span>
+              <span className="text-xs text-gray-400 line-through">{product.originalPrice} {currency}</span>
             )}
           </div>
           <button
@@ -66,12 +66,12 @@ export default function ProductCard({ product }) {
             {inCart ? (
               <>
                 <Download size={13} />
-                Added
+                تمت الإضافة
               </>
             ) : (
               <>
                 <ShoppingCart size={13} />
-                Add to Cart
+                أضف للسلة
               </>
             )}
           </button>

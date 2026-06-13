@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Download, Shield, Zap, Users, Star, ChevronRight } from "lucide-react";
+import { ArrowLeft, Download, Shield, Zap, Users, Star, ChevronLeft } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import { products, categories } from "@/lib/products";
 
@@ -18,29 +18,29 @@ export default function HomePage() {
         <div className="relative max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-gray-100 text-gray-600 text-xs font-medium px-4 py-2 rounded-full mb-8">
             <Zap size={12} className="text-amber-500" />
-            Professional Excel Tools — Ready to Download
+            أدوات إكسل احترافية — تحميل فوري بعد الشراء
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight tracking-tight mb-6">
-            Spreadsheets that work
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-6">
+            جداول بيانات تعمل
             <br />
-            <span className="text-gray-400">as hard as you do</span>
+            <span className="text-gray-400">بنفس جدّيتك</span>
           </h1>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Professional Excel tools for business finance, HR, inventory, sales, and analytics. Buy once, download instantly, use forever.
+            أدوات إكسل احترافية للمالية والموارد البشرية والمخزون والمبيعات والتحليلات. اشترِ مرة واحدة، حمّل فوراً، استخدم للأبد.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               href="/products"
               className="flex items-center gap-2 bg-gray-900 text-white px-7 py-3.5 rounded-xl text-sm font-medium hover:bg-gray-700 transition-colors"
             >
-              Browse All Tools
-              <ArrowRight size={16} />
+              تصفح جميع الأدوات
+              <ArrowLeft size={16} />
             </Link>
             <Link
               href="#categories"
               className="flex items-center gap-2 text-gray-600 px-7 py-3.5 rounded-xl text-sm font-medium hover:text-gray-900 border border-gray-200 hover:border-gray-300 transition-all"
             >
-              Explore by Category
+              استعرض حسب الفئة
             </Link>
           </div>
         </div>
@@ -48,9 +48,9 @@ export default function HomePage() {
         {/* Stats */}
         <div className="relative max-w-2xl mx-auto mt-16 grid grid-cols-3 gap-6 text-center">
           {[
-            { value: "500+", label: "Happy customers" },
-            { value: "8", label: "Ready-to-use tools" },
-            { value: "4.8★", label: "Average rating" },
+            { value: "+500", label: "عميل راضٍ" },
+            { value: "8", label: "أداة جاهزة للاستخدام" },
+            { value: "4.8★", label: "متوسط التقييم" },
           ].map((stat) => (
             <div key={stat.label} className="bg-gray-50 rounded-2xl p-5 border border-gray-100">
               <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
@@ -64,40 +64,40 @@ export default function HomePage() {
       <section className="bg-gray-50 py-20 px-4 sm:px-6 border-y border-gray-100">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Why choose Seedaal?</h2>
-            <p className="text-gray-500 text-sm max-w-xl mx-auto">Everything you need is already built in — just download and start working.</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">لماذا سيدال؟</h2>
+            <p className="text-gray-500 text-sm max-w-xl mx-auto">كل ما تحتاجه مبني مسبقاً — فقط حمّل وابدأ العمل فوراً.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 icon: <Zap size={22} className="text-amber-500" />,
-                title: "Instant download",
-                desc: "Buy once and download immediately. Your files are ready the moment payment is confirmed.",
+                title: "تحميل فوري",
+                desc: "اشتر مرة واحدة وحمّل فوراً. ملفاتك جاهزة بمجرد تأكيد الدفع.",
               },
               {
                 icon: <Shield size={22} className="text-emerald-500" />,
-                title: "No formulas to write",
-                desc: "All calculations are pre-built. Just enter your data and everything updates automatically.",
+                title: "لا حاجة لكتابة معادلات",
+                desc: "جميع الحسابات مبنية مسبقاً. فقط أدخل بياناتك وكل شيء يتحدث تلقائياً.",
               },
               {
                 icon: <Users size={22} className="text-blue-500" />,
-                title: "Built for all business sizes",
-                desc: "Whether you're a solo freelancer or a 200-person company — our tools scale with you.",
+                title: "مناسب لجميع أحجام الأعمال",
+                desc: "سواء كنت عمل حر أو شركة تضم أكثر من 200 موظف — أدواتنا تتكيف معك.",
               },
               {
                 icon: <Download size={22} className="text-violet-500" />,
-                title: "Works with all Excel versions",
-                desc: "Compatible with Excel 2016, 2019, 2021, and Microsoft 365. No add-ins required.",
+                title: "يعمل مع جميع إصدارات إكسل",
+                desc: "متوافق مع Excel 2016, 2019, 2021 وMicrosoft 365. لا يحتاج إضافات.",
               },
               {
                 icon: <Star size={22} className="text-amber-500" />,
-                title: "Professionally designed",
-                desc: "Clean layouts and presentation-ready reports you can share with clients or management.",
+                title: "تصميم احترافي",
+                desc: "تخطيطات أنيقة وتقارير جاهزة للعرض يمكن مشاركتها مع العملاء أو الإدارة.",
               },
               {
-                icon: <ArrowRight size={22} className="text-gray-500" />,
-                title: "Free updates forever",
-                desc: "Buy a tool and get all future improvements included — we keep updating based on feedback.",
+                icon: <ArrowLeft size={22} className="text-gray-500" />,
+                title: "تحديثات مجانية للأبد",
+                desc: "اشترِ أداة واحصل على جميع التحسينات المستقبلية — نواصل التطوير بناءً على ملاحظاتك.",
               },
             ].map((item) => (
               <div key={item.title} className="bg-white rounded-2xl p-6 border border-gray-100">
@@ -117,11 +117,11 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-10">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">Shop by category</h2>
-              <p className="text-gray-500 text-sm">Find the right tool for your business needs</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">تسوّق حسب الفئة</h2>
+              <p className="text-gray-500 text-sm">اعثر على الأداة المناسبة لاحتياجات عملك</p>
             </div>
             <Link href="/products" className="hidden sm:flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors">
-              View all <ChevronRight size={14} />
+              عرض الكل <ChevronLeft size={14} />
             </Link>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -144,11 +144,11 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-10">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">Best sellers</h2>
-              <p className="text-gray-500 text-sm">Our most popular tools, trusted by hundreds of businesses</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">الأكثر مبيعاً</h2>
+              <p className="text-gray-500 text-sm">أدواتنا الأكثر شعبية، يثق بها المئات من الشركات</p>
             </div>
             <Link href="/products" className="hidden sm:flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors">
-              View all <ChevronRight size={14} />
+              عرض الكل <ChevronLeft size={14} />
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -161,34 +161,34 @@ export default function HomePage() {
               href="/products"
               className="inline-flex items-center gap-2 border border-gray-200 text-gray-700 hover:border-gray-400 hover:text-gray-900 px-7 py-3 rounded-xl text-sm font-medium transition-all"
             >
-              See all 8 tools <ArrowRight size={15} />
+              عرض جميع الأدوات الـ 8 <ArrowLeft size={15} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Social proof / Testimonials */}
+      {/* Testimonials */}
       <section className="py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">What our customers say</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">ماذا يقول عملاؤنا</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                name: "Sarah M.",
-                role: "Finance Manager, Retail Co.",
-                text: "The Budget Planner Pro saved our team at least 10 hours per month. The formulas are rock solid and the dashboard is beautiful.",
+                name: "سارة المحمد",
+                role: "مديرة مالية، شركة تجزئة",
+                text: "مخطط الميزانية الاحترافي وفّر على فريقنا أكثر من 10 ساعات شهرياً. المعادلات محكمة ولوحة البيانات رائعة.",
               },
               {
-                name: "Ahmed K.",
-                role: "Operations Director, SME",
-                text: "I was skeptical at first but the Inventory Management sheet is incredibly powerful. We caught stock issues we didn't even know existed.",
+                name: "أحمد الغامدي",
+                role: "مدير العمليات، شركة متوسطة",
+                text: "كنت متشككاً في البداية، لكن نظام إدارة المخزون قوي بشكل لا يصدق. رصدنا مشاكل في المخزون لم نكن نعلم بوجودها.",
               },
               {
-                name: "Laura D.",
-                role: "HR Lead, Tech Startup",
-                text: "Payroll was a nightmare before this. Now it takes 30 minutes instead of a full day. Worth every penny.",
+                name: "نورة العتيبي",
+                role: "مديرة موارد بشرية، شركة ناشئة",
+                text: "كانت الرواتب كابوساً قبل هذه الأداة. الآن تستغرق 30 دقيقة بدلاً من يوم كامل. تستحق كل ريال.",
               },
             ].map((t) => (
               <div key={t.name} className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm">
@@ -210,15 +210,15 @@ export default function HomePage() {
 
       {/* CTA Banner */}
       <section className="mx-4 sm:mx-6 mb-8 rounded-3xl bg-gray-900 text-white py-16 px-8 text-center">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-3">Ready to work smarter?</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold mb-3">هل أنت مستعد للعمل بذكاء أكبر؟</h2>
         <p className="text-gray-400 text-sm mb-8 max-w-lg mx-auto">
-          Join hundreds of businesses already saving time with Seedaal tools. Download once, use forever.
+          انضم إلى مئات الشركات التي توفر وقتها يومياً بأدوات سيدال. اشترِ مرة، استخدم للأبد.
         </p>
         <Link
           href="/products"
           className="inline-flex items-center gap-2 bg-white text-gray-900 px-8 py-3.5 rounded-xl text-sm font-semibold hover:bg-gray-100 transition-colors"
         >
-          Browse All Tools <ArrowRight size={16} />
+          تصفح جميع الأدوات <ArrowLeft size={16} />
         </Link>
       </section>
     </>

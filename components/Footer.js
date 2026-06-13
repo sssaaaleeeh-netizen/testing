@@ -12,10 +12,10 @@ export default function Footer() {
               <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
                 <FileSpreadsheet size={18} className="text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900">Seedaal</span>
+              <span className="text-xl font-bold text-gray-900">سيدال</span>
             </Link>
             <p className="text-sm text-gray-500 leading-relaxed max-w-xs">
-              Professional Excel tools and spreadsheet templates for businesses of all sizes. Download, fill in, and save hours of work.
+              أدوات إكسل احترافية ونماذج جداول بيانات جاهزة للأعمال بجميع أحجامها. حمّل، أدخل بياناتك، ووفّر ساعات من العمل.
             </p>
             <div className="flex items-center gap-3 mt-5">
               <a href="mailto:hello@seedaal.com" className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300 transition-colors">
@@ -32,9 +32,9 @@ export default function Footer() {
 
           {/* Products */}
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 mb-4">Products</h4>
+            <h4 className="text-sm font-semibold text-gray-900 mb-4">الأدوات</h4>
             <ul className="space-y-2.5">
-              {["Financial Management", "HR & Payroll", "Inventory & Stock", "Project Management", "Sales & CRM", "Data & Analytics"].map((item) => (
+              {["الإدارة المالية", "الموارد البشرية والرواتب", "المخزون والمستودعات", "إدارة المشاريع", "المبيعات وإدارة العملاء", "البيانات والتحليلات"].map((item) => (
                 <li key={item}>
                   <Link href="/products" className="text-sm text-gray-500 hover:text-gray-800 transition-colors">
                     {item}
@@ -46,14 +46,14 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 mb-4">Company</h4>
+            <h4 className="text-sm font-semibold text-gray-900 mb-4">الشركة</h4>
             <ul className="space-y-2.5">
               {[
-                { label: "About Us", href: "/about" },
-                { label: "Contact", href: "/contact" },
-                { label: "Privacy Policy", href: "/privacy" },
-                { label: "Refund Policy", href: "/refund" },
-                { label: "Terms of Service", href: "/terms" },
+                { label: "من نحن", href: "/about" },
+                { label: "تواصل معنا", href: "/contact" },
+                { label: "سياسة الخصوصية", href: "/privacy" },
+                { label: "سياسة الاسترجاع", href: "/refund" },
+                { label: "شروط الخدمة", href: "/terms" },
               ].map((item) => (
                 <li key={item.label}>
                   <Link href={item.href} className="text-sm text-gray-500 hover:text-gray-800 transition-colors">
@@ -66,8 +66,8 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-200 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-gray-400">© {new Date().getFullYear()} Seedaal. All rights reserved.</p>
-          <p className="text-xs text-gray-400">Secure payments powered by Stripe 🔒</p>
+          <p className="text-xs text-gray-400">© {new Date().getFullYear()} سيدال. جميع الحقوق محفوظة.</p>
+          <p className="text-xs text-gray-400">مدفوعات آمنة عبر Stripe 🔒</p>
         </div>
       </div>
     </footer>

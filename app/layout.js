@@ -1,21 +1,20 @@
-import { Inter } from "next/font/google";
+import { Cairo } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", weight: ["400", "500", "600", "700", "800"] });
 
 export const metadata = {
-  title: "Seedaal — Professional Excel Tools & Templates",
-  description:
-    "Download professional Excel spreadsheet tools for business. Budget planners, payroll calculators, inventory systems, sales trackers, and more.",
-  keywords: "excel templates, spreadsheet tools, business templates, excel download, budget planner, payroll calculator",
+  title: "سيدال — أدوات إكسل الاحترافية",
+  description: "حمّل أدوات إكسل الاحترافية للأعمال: مخططات الميزانية، حاسبات الرواتب، أنظمة المخزون، متتبع المبيعات والمزيد.",
+  keywords: "قوالب اكسل, ادوات اكسل, نماذج اعمال, تحميل اكسل, مخطط ميزانية, حاسبة رواتب",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="ar" dir="rtl" className={cairo.variable}>
       <body className="font-sans bg-white text-gray-900 antialiased">
         <CartProvider>
           <Navbar />

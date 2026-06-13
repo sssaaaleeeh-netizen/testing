@@ -4,10 +4,10 @@ import { useParams } from "next/navigation";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
-  ArrowLeft, Star, Download, ShoppingCart,
+  ArrowRight, Star, Download, ShoppingCart,
   CheckCircle, Monitor, FileSpreadsheet, ChevronRight
 } from "lucide-react";
-import { getProductById, getBadgeStyle, categories, products } from "@/lib/products";
+import { getProductById, getBadgeStyle, categories, products, currency } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
 import ProductCard from "@/components/ProductCard";
 
@@ -28,9 +28,9 @@ export default function ProductPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1.5 text-xs text-gray-400 mb-8">
-        <Link href="/" className="hover:text-gray-700 transition-colors">Home</Link>
+        <Link href="/" className="hover:text-gray-700 transition-colors">الرئيسية</Link>
         <ChevronRight size={12} />
-        <Link href="/products" className="hover:text-gray-700 transition-colors">Products</Link>
+        <Link href="/products" className="hover:text-gray-700 transition-colors">الأدوات</Link>
         <ChevronRight size={12} />
         <span className="text-gray-600">{product.name}</span>
       </nav>
@@ -50,7 +50,7 @@ export default function ProductPage() {
             <div className="text-8xl mb-4">{product.icon || "📊"}</div>
             <div className="flex items-center gap-2 justify-center bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm">
               <FileSpreadsheet size={14} className="text-emerald-500" />
-              <span className="text-xs font-medium text-gray-700">.xlsx file</span>
+              <span className="text-xs font-medium text-gray-700">ملف .xlsx</span>
             </div>
           </div>
           {product.badge && (
@@ -82,14 +82,14 @@ export default function ProductPage() {
               ))}
             </div>
             <span className="text-sm font-medium text-gray-700">{product.rating}</span>
-            <span className="text-sm text-gray-400">({product.reviews} reviews)</span>
+            <span className="text-sm text-gray-400">({product.reviews} تقييم)</span>
           </div>
 
           <p className="text-gray-600 text-sm leading-relaxed mb-6">{product.longDescription}</p>
 
           {/* Features */}
           <div className="mb-7">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">What's included</h3>
+            <h3 className="text-sm font-semibold text-gray-900 mb-3">ما يشمله المنتج</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {product.features.map((f) => (
                 <div key={f} className="flex items-start gap-2 text-sm text-gray-600">
@@ -103,20 +103,20 @@ export default function ProductPage() {
           {/* Compatibility */}
           <div className="flex items-center gap-2 text-xs text-gray-500 bg-gray-50 rounded-xl px-4 py-3 mb-7 border border-gray-100">
             <Monitor size={14} />
-            <span>Compatible with: {product.compatible}</span>
+            <span>متوافق مع: {product.compatible}</span>
           </div>
 
           {/* Price & CTA */}
           <div className="flex items-center gap-5 mb-4">
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-gray-900">${product.price}</span>
+              <span className="text-3xl font-bold text-gray-900">{product.price} {currency}</span>
               {product.originalPrice && (
-                <span className="text-base text-gray-400 line-through">${product.originalPrice}</span>
+                <span className="text-base text-gray-400 line-through">{product.originalPrice} {currency}</span>
               )}
             </div>
             {product.originalPrice && (
               <span className="text-xs bg-emerald-100 text-emerald-700 font-semibold px-2.5 py-1 rounded-full">
-                Save ${product.originalPrice - product.price}
+                وفّر {product.originalPrice - product.price} {currency}
               </span>
             )}
           </div>
@@ -132,9 +132,9 @@ export default function ProductPage() {
               }`}
             >
               {inCart ? (
-                <><Download size={16} /> Added to Cart</>
+                <><Download size={16} /> تمت الإضافة للسلة</>
               ) : (
-                <><ShoppingCart size={16} /> Add to Cart</>
+                <><ShoppingCart size={16} /> أضف للسلة</>
               )}
             </button>
             {inCart && (
@@ -142,14 +142,14 @@ export default function ProductPage() {
                 href="/cart"
                 className="flex items-center gap-2 border border-gray-200 text-gray-700 hover:border-gray-400 px-5 py-3.5 rounded-xl text-sm font-medium transition-all"
               >
-                View Cart
+                عرض السلة
               </Link>
             )}
           </div>
 
           <p className="text-xs text-gray-400 mt-3 flex items-center gap-1.5">
             <Download size={12} />
-            Instant download after payment · Secure checkout via Stripe
+            تحميل فوري بعد الدفع · دفع آمن عبر Stripe
           </p>
         </div>
       </div>
@@ -157,7 +157,7 @@ export default function ProductPage() {
       {/* Related Products */}
       {relatedProducts.length > 0 && (
         <div>
-          <h2 className="text-xl font-bold text-gray-900 mb-6">More in {category?.name}</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-6">المزيد من {category?.name}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {relatedProducts.map((p) => (
               <ProductCard key={p.id} product={p} />
