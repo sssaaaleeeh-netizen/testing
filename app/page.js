@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { ArrowLeft, Download, Shield, Zap, Users, Star, ChevronLeft } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
-import { products, categories } from "@/lib/products";
+import { products, categories, featuredProductIds } from "@/lib/products";
 
-const featuredProducts = products.slice(0, 4);
+const featuredProducts = products.filter((p) => featuredProductIds.includes(p.id));
 
 export default function HomePage() {
   return (
@@ -47,8 +47,8 @@ export default function HomePage() {
         <div className="relative max-w-2xl mx-auto mt-16 grid grid-cols-3 gap-6 text-center">
           {[
             { value: "+700", label: "عميل راضٍ" },
-            { value: "5", label: "أداة جاهزة للاستخدام" },
-            { value: "4.9★", label: "متوسط التقييم" },
+            { value: "24", label: "أداة جاهزة للاستخدام" },
+            { value: "4.8★", label: "متوسط التقييم" },
           ].map((stat) => (
             <div key={stat.label} className="bg-gray-50 rounded-2xl p-5 border border-gray-100">
               <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
@@ -149,7 +149,7 @@ export default function HomePage() {
               عرض الكل <ChevronLeft size={14} />
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -159,7 +159,7 @@ export default function HomePage() {
               href="/products"
               className="inline-flex items-center gap-2 border border-gray-200 text-gray-700 hover:border-gray-400 hover:text-gray-900 px-7 py-3 rounded-xl text-sm font-medium transition-all"
             >
-              عرض جميع الأدوات <ArrowLeft size={15} />
+              عرض جميع الأدوات الـ 24 <ArrowLeft size={15} />
             </Link>
           </div>
         </div>

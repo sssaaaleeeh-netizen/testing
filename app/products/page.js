@@ -24,7 +24,7 @@ export default function ProductsPage() {
       <div className="mb-10">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">جميع أدوات إكسل</h1>
         <p className="text-gray-500 text-sm">
-          {products.length} أداة إكسل احترافية — تحميل فوري بعد الشراء
+          {products.length} أداة إكسل احترافية بالعربي — تحميل فوري بعد الشراء
         </p>
       </div>
 

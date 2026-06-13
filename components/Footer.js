@@ -34,7 +34,7 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-gray-900 mb-4">الأدوات</h4>
             <ul className="space-y-2.5">
-              {["الإدارة المالية", "الموارد البشرية والرواتب", "المخزون والمستودعات", "إدارة المشاريع", "المبيعات وإدارة العملاء", "البيانات والتحليلات"].map((item) => (
+              {["التمويل الشخصي والادخار", "الاستثمار والأسواق المالية", "العقارات", "الأعمال والشركات", "قطاعات متخصصة", "الحياة والمناسبات"].map((item) => (
                 <li key={item}>
                   <Link href="/products" className="text-sm text-gray-500 hover:text-gray-800 transition-colors">
                     {item}
