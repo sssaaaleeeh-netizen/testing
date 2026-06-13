@@ -3,9 +3,7 @@ import { ArrowLeft, Download, Shield, Zap, Users, Star, ChevronLeft } from "luci
 import ProductCard from "@/components/ProductCard";
 import { products, categories } from "@/lib/products";
 
-const featuredProducts = products.filter((p) =>
-  ["budget-planner-pro", "inventory-management", "payroll-calculator", "kpi-dashboard"].includes(p.id)
-);
+const featuredProducts = products.slice(0, 4);
 
 export default function HomePage() {
   return (
@@ -21,12 +19,12 @@ export default function HomePage() {
             أدوات إكسل احترافية — تحميل فوري بعد الشراء
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-6">
-            جداول بيانات تعمل
+            أدوات مالية احترافية
             <br />
-            <span className="text-gray-400">بنفس جدّيتك</span>
+            <span className="text-gray-400">بالعربي — لأول مرة</span>
           </h1>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-            أدوات إكسل احترافية للمالية والموارد البشرية والمخزون والمبيعات والتحليلات. اشترِ مرة واحدة، حمّل فوراً، استخدم للأبد.
+            من ميزانيتك الشخصية إلى استثماراتك وإدارة مطعمك ومتجرك الإلكتروني — كل شيء بالعربي، جاهز للاستخدام الفوري، بدون معادلات.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
@@ -48,9 +46,9 @@ export default function HomePage() {
         {/* Stats */}
         <div className="relative max-w-2xl mx-auto mt-16 grid grid-cols-3 gap-6 text-center">
           {[
-            { value: "+500", label: "عميل راضٍ" },
-            { value: "8", label: "أداة جاهزة للاستخدام" },
-            { value: "4.8★", label: "متوسط التقييم" },
+            { value: "+700", label: "عميل راضٍ" },
+            { value: "5", label: "أداة جاهزة للاستخدام" },
+            { value: "4.9★", label: "متوسط التقييم" },
           ].map((stat) => (
             <div key={stat.label} className="bg-gray-50 rounded-2xl p-5 border border-gray-100">
               <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
@@ -145,7 +143,7 @@ export default function HomePage() {
           <div className="flex items-center justify-between mb-10">
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">الأكثر مبيعاً</h2>
-              <p className="text-gray-500 text-sm">أدواتنا الأكثر شعبية، يثق بها المئات من الشركات</p>
+              <p className="text-gray-500 text-sm">أدوات يثق بها أكثر من 700 عميل في السعودية</p>
             </div>
             <Link href="/products" className="hidden sm:flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors">
               عرض الكل <ChevronLeft size={14} />
@@ -161,7 +159,7 @@ export default function HomePage() {
               href="/products"
               className="inline-flex items-center gap-2 border border-gray-200 text-gray-700 hover:border-gray-400 hover:text-gray-900 px-7 py-3 rounded-xl text-sm font-medium transition-all"
             >
-              عرض جميع الأدوات الـ 8 <ArrowLeft size={15} />
+              عرض جميع الأدوات <ArrowLeft size={15} />
             </Link>
           </div>
         </div>
@@ -176,19 +174,19 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                name: "سارة المحمد",
-                role: "مديرة مالية، شركة تجزئة",
-                text: "مخطط الميزانية الاحترافي وفّر على فريقنا أكثر من 10 ساعات شهرياً. المعادلات محكمة ولوحة البيانات رائعة.",
+                name: "فهد العنزي",
+                role: "مستثمر في سوق الأسهم السعودي",
+                text: "حزمة المستثمر السعودي غيّرت طريقة تفكيري بالكامل. الفحص الشرعي لوحده يستحق السعر عشر مرات.",
               },
               {
-                name: "أحمد الغامدي",
-                role: "مدير العمليات، شركة متوسطة",
-                text: "كنت متشككاً في البداية، لكن نظام إدارة المخزون قوي بشكل لا يصدق. رصدنا مشاكل في المخزون لم نكن نعلم بوجودها.",
+                name: "مريم الشهري",
+                role: "صاحبة مقهى، الرياض",
+                text: "كنت ما أعرف وين تروح فلوسي! بعد أداة المطعم اكتشفت إن food cost بعض الأطباق عندي 60%. الحين عندي هامش ربح واضح.",
               },
               {
-                name: "نورة العتيبي",
-                role: "مديرة موارد بشرية، شركة ناشئة",
-                text: "كانت الرواتب كابوساً قبل هذه الأداة. الآن تستغرق 30 دقيقة بدلاً من يوم كامل. تستحق كل ريال.",
+                name: "سلطان الدوسري",
+                role: "صاحب متجر إلكتروني",
+                text: "تحليل ABC كشّف لي إن 3 منتجات فقط يحققون 78% من أرباحي. الحين أركّز عليهم وما أبعثر جهدي.",
               },
             ].map((t) => (
               <div key={t.name} className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm">
