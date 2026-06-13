@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileSpreadsheet, Mail, Twitter, Linkedin } from "lucide-react";
+import { FileSpreadsheet, Mail, Globe, ExternalLink } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -22,10 +22,10 @@ export default function Footer() {
                 <Mail size={14} className="text-gray-600" />
               </a>
               <a href="#" className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300 transition-colors">
-                <Twitter size={14} className="text-gray-600" />
+                <Globe size={14} className="text-gray-600" />
               </a>
               <a href="#" className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300 transition-colors">
-                <Linkedin size={14} className="text-gray-600" />
+                <ExternalLink size={14} className="text-gray-600" />
               </a>
             </div>
           </div>
