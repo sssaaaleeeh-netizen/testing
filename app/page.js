@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, Download, Shield, Zap, Users, Star, ChevronLeft } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
+import MarketingBanner from "@/components/MarketingBanner";
 import { products, categories, featuredProductIds } from "@/lib/products";
 
 const featuredProducts = products.filter((p) => featuredProductIds.includes(p.id));
@@ -57,6 +58,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* Animated Marketing Banner */}
+      <MarketingBanner />
 
       {/* Why Seedaal */}
       <section className="bg-gray-50 py-20 px-4 sm:px-6 border-y border-gray-100">
