@@ -1,9 +1,18 @@
 "use client";
 export const dynamic = "force-dynamic";
 import { useState } from "react";
-import { Search } from "lucide-react";
+import { Search, Wallet, TrendingUp, Home, Building2, Wrench, Heart } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import { products, categories } from "@/lib/products";
+
+const CATEGORY_ICONS = {
+  "personal-finance": <Wallet size={13} strokeWidth={2} />,
+  "investment":       <TrendingUp size={13} strokeWidth={2} />,
+  "real-estate":      <Home size={13} strokeWidth={2} />,
+  "business":         <Building2 size={13} strokeWidth={2} />,
+  "specialized":      <Wrench size={13} strokeWidth={2} />,
+  "life-events":      <Heart size={13} strokeWidth={2} />,
+};
 
 export default function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -64,7 +73,10 @@ export default function ProductsPage() {
                   : "bg-white text-gray-600 border-gray-200 hover:border-gray-400"
               }`}
             >
-              {cat.icon} {cat.name}
+              <span className="flex items-center gap-1.5">
+                {CATEGORY_ICONS[cat.id]}
+                {cat.name}
+              </span>
             </button>
           ))}
         </div>

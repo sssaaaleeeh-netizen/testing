@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileSpreadsheet, Mail, Globe, ExternalLink } from "lucide-react";
+import { FileSpreadsheet, Mail, Globe, ExternalLink, Lock } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -67,7 +67,10 @@ export default function Footer() {
 
         <div className="border-t border-gray-200 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-gray-400">© {new Date().getFullYear()} سيدال. جميع الحقوق محفوظة.</p>
-          <p className="text-xs text-gray-400">مدفوعات آمنة عبر Moyasar 🔒</p>
+          <p className="text-xs text-gray-400 flex items-center gap-1.5">
+            <Lock size={11} />
+            مدفوعات آمنة عبر Moyasar
+          </p>
         </div>
       </div>
     </footer>

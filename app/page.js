@@ -1,8 +1,17 @@
 import Link from "next/link";
-import { ArrowLeft, Download, Shield, Zap, Users, Star, ChevronLeft } from "lucide-react";
+import { ArrowLeft, Download, Shield, Zap, Users, Star, ChevronLeft, Wallet, TrendingUp, Home, Building2, Wrench, Heart } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import MarketingBanner from "@/components/MarketingBanner";
 import { products, categories, featuredProductIds } from "@/lib/products";
+
+const CATEGORY_ICONS = {
+  "personal-finance": <Wallet size={26} strokeWidth={1.5} />,
+  "investment":       <TrendingUp size={26} strokeWidth={1.5} />,
+  "real-estate":      <Home size={26} strokeWidth={1.5} />,
+  "business":         <Building2 size={26} strokeWidth={1.5} />,
+  "specialized":      <Wrench size={26} strokeWidth={1.5} />,
+  "life-events":      <Heart size={26} strokeWidth={1.5} />,
+};
 
 const featuredProducts = products.filter((p) => featuredProductIds.includes(p.id));
 
@@ -49,10 +58,13 @@ export default function HomePage() {
           {[
             { value: "+700", label: "عميل راضٍ" },
             { value: "24", label: "أداة جاهزة للاستخدام" },
-            { value: "4.8★", label: "متوسط التقييم" },
+            { value: "4.8", label: "متوسط التقييم", star: true },
           ].map((stat) => (
             <div key={stat.label} className="bg-gray-50 rounded-2xl p-5 border border-gray-100">
-              <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
+              <div className="flex items-center justify-center gap-1 text-2xl font-bold text-gray-900">
+                {stat.value}
+                {stat.star && <Star size={18} className="text-amber-400 fill-amber-400" />}
+              </div>
               <div className="text-xs text-gray-500 mt-1">{stat.label}</div>
             </div>
           ))}
@@ -131,9 +143,11 @@ export default function HomePage() {
               <Link
                 key={cat.id}
                 href={`/products?category=${cat.id}`}
-                className="flex flex-col items-center gap-2.5 bg-white border border-gray-100 rounded-2xl p-5 hover:border-gray-300 hover:shadow-md transition-all group text-center"
+                className="flex flex-col items-center gap-3 bg-white border border-gray-100 rounded-2xl p-5 hover:border-gray-300 hover:shadow-md transition-all group text-center"
               >
-                <span className="text-3xl group-hover:scale-110 transition-transform">{cat.icon}</span>
+                <div className="w-11 h-11 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-600 group-hover:text-gray-900 group-hover:bg-gray-100 transition-all">
+                  {CATEGORY_ICONS[cat.id]}
+                </div>
                 <span className="text-xs font-medium text-gray-700 leading-snug">{cat.name}</span>
               </Link>
             ))}
