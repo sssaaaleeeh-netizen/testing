@@ -10,13 +10,14 @@ import { getProductById } from "@/lib/products";
 function SuccessContent() {
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
+  const success = searchParams.get("success"); // Paymob sends "true"/"false"
   const paymentId = searchParams.get("id");
   const { clearCart } = useCart();
 
   const [productIds, setProductIds] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const isPaid = status === "paid";
+  const isPaid = status === "paid" || success === "true";
 
   useEffect(() => {
     if (!isPaid) { setLoading(false); return; }

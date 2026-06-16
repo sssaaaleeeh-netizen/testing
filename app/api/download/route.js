@@ -1,40 +1,36 @@
 import { NextResponse } from "next/server";
-import { getMoyasarAuthHeader } from "@/lib/moyasar";
+import { getTransaction } from "@/lib/paymob";
 import { getProductById } from "@/lib/products";
 import { readFile } from "fs/promises";
 import path from "path";
 
 export const runtime = "nodejs";
 
-// GET /api/download?product=PRODUCT_ID&payment=PAYMENT_ID
+// GET /api/download?product=PRODUCT_ID&payment=TRANSACTION_ID
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const productId = searchParams.get("product");
-  const paymentId = searchParams.get("payment");
+  const transactionId = searchParams.get("payment");
 
-  if (!productId || !paymentId) {
+  if (!productId || !transactionId) {
     return new NextResponse("معاملات مفقودة", { status: 400 });
   }
 
-  // 1. Verify payment is real and paid via Moyasar
-  let payment;
+  // 1. Verify transaction is real and successful via Paymob
+  let transaction;
   try {
-    const res = await fetch(`https://api.moyasar.com/v1/payments/${paymentId}`, {
-      headers: { Authorization: getMoyasarAuthHeader() },
-      cache: "no-store",
-    });
-    if (!res.ok) return new NextResponse("الدفع غير موجود", { status: 403 });
-    payment = await res.json();
+    transaction = await getTransaction(transactionId);
+    if (!transaction) return new NextResponse("المعاملة غير موجودة", { status: 403 });
   } catch {
     return new NextResponse("خطأ في التحقق من الدفع", { status: 500 });
   }
 
-  if (payment.status !== "paid") {
+  if (!transaction.success) {
     return new NextResponse("الدفع غير مكتمل", { status: 403 });
   }
 
-  // 2. Verify this product was part of that payment
-  const paidIds = (payment.metadata?.productIds || "").split(",").map((s) => s.trim());
+  // 2. Verify this product was part of that transaction's order
+  const paidIds = (transaction.order?.merchant_order_id || "").split(",").map((s) => s.trim());
   if (!paidIds.includes(productId)) {
     return new NextResponse("هذا المنتج غير مشمول في الدفع", { status: 403 });
   }

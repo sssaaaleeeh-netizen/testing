@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createPayment } from "@/lib/moyasar";
+import { createCheckoutUrl } from "@/lib/paymob";
 
 export async function POST(req) {
   try {
@@ -10,26 +10,16 @@ export async function POST(req) {
     }
 
     const totalSAR = items.reduce((sum, item) => sum + item.price, 0);
-    const description = items.map((i) => i.name).join(" + ");
     const productIds = items.map((i) => i.id).join(",");
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-    const payment = await createPayment({
+    const url = await createCheckoutUrl({
       amountSAR: totalSAR,
-      description,
-      callbackUrl: `${baseUrl}/success`,
       productIds,
+      callbackUrl: `${baseUrl}/success`,
     });
 
-    // Moyasar returns the redirect URL in source.transaction_url
-    const redirectUrl = payment?.source?.transaction_url;
-
-    if (!redirectUrl) {
-      console.error("Moyasar payment creation failed:", payment);
-      return NextResponse.json({ error: "فشل إنشاء الدفع" }, { status: 500 });
-    }
-
-    return NextResponse.json({ url: redirectUrl });
+    return NextResponse.json({ url });
   } catch (err) {
     console.error("Checkout error:", err);
     return NextResponse.json({ error: "حدث خطأ في الدفع" }, { status: 500 });
