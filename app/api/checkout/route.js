@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { createCheckoutUrl } from "@/lib/myfatoorah";
-import { getProductById } from "@/lib/products";
 
 export async function POST(req) {
   try {
@@ -14,21 +13,18 @@ export async function POST(req) {
     const productIds = items.map((i) => i.id).join(",");
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://seedaal.store";
 
-    const enrichedItems = items.map((item) => {
-      const product = getProductById(item.id);
-      return { name: product?.name || item.id, price: item.price };
-    });
-
     const url = await createCheckoutUrl({
       amountSAR: totalSAR,
       productIds,
-      items: enrichedItems,
       callbackUrl: `${baseUrl}/success`,
     });
 
     return NextResponse.json({ url });
   } catch (err) {
     console.error("Checkout error:", err?.message || err);
-    return NextResponse.json({ error: "حدث خطأ في الدفع", detail: err?.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "حدث خطأ في الدفع", detail: err?.message },
+      { status: 500 }
+    );
   }
 }
