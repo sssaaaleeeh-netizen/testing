@@ -7,9 +7,25 @@ import { CartProvider } from "@/context/CartContext";
 const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", weight: ["400", "500", "600", "700", "800"] });
 
 export const metadata = {
-  title: "سيدال — أدوات إكسل الاحترافية",
-  description: "حمّل أدوات إكسل الاحترافية للأعمال: مخططات الميزانية، حاسبات الرواتب، أنظمة المخزون، متتبع المبيعات والمزيد.",
-  keywords: "قوالب اكسل, ادوات اكسل, نماذج اعمال, تحميل اكسل, مخطط ميزانية, حاسبة رواتب",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "https://seedaal.com"),
+  title: {
+    default: "سيدال — أدوات إكسل الاحترافية",
+    template: "%s — سيدال",
+  },
+  description: "حمّل أدوات إكسل الاحترافية للأعمال بالعربي: مخططات الميزانية، تحليل الاستثمار، إدارة العقارات، أدوات الأعمال والمزيد.",
+  keywords: "قوالب اكسل, ادوات اكسل, نماذج اعمال, تحميل اكسل, مخطط ميزانية, تحليل استثمار, سيدال",
+  openGraph: {
+    type: "website",
+    locale: "ar_SA",
+    siteName: "سيدال",
+    title: "سيدال — أدوات إكسل الاحترافية",
+    description: "حمّل أدوات إكسل الاحترافية للأعمال بالعربي — تحميل فوري بعد الشراء.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "سيدال — أدوات إكسل الاحترافية",
+    description: "حمّل أدوات إكسل الاحترافية للأعمال بالعربي — تحميل فوري بعد الشراء.",
+  },
 };
 
 export default function RootLayout({ children }) {

@@ -1,24 +1,35 @@
-"use client";
-export const dynamic = "force-dynamic";
-import { useParams } from "next/navigation";
-import { notFound } from "next/navigation";
 import Link from "next/link";
-import {
-  Star, Download, ShoppingCart,
-  CheckCircle, Monitor, FileSpreadsheet, ChevronRight
-} from "lucide-react";
+import { notFound } from "next/navigation";
+import { Star, CheckCircle, Monitor, FileSpreadsheet, ChevronRight, Download } from "lucide-react";
 import { getProductById, getBadgeStyle, categories, products, currency } from "@/lib/products";
-import { useCart } from "@/context/CartContext";
 import ProductCard from "@/components/ProductCard";
 import ProductVisual from "@/components/ProductVisual";
+import ProductCartButton from "@/components/ProductCartButton";
 
-export default function ProductPage() {
-  const params = useParams();
-  const product = getProductById(params.id);
-  const { addToCart, isInCart } = useCart();
-  const inCart = isInCart(product?.id);
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const product = getProductById(id);
+  if (!product) return { title: "المنتج غير موجود — سيدال" };
 
-  if (!product) return notFound();
+  return {
+    title: `${product.name} — سيدال`,
+    description: product.longDescription || product.description,
+    openGraph: {
+      title: product.name,
+      description: product.longDescription || product.description,
+      type: "website",
+    },
+  };
+}
+
+export function generateStaticParams() {
+  return products.map((p) => ({ id: p.id }));
+}
+
+export default async function ProductPage({ params }) {
+  const { id } = await params;
+  const product = getProductById(id);
+  if (!product) notFound();
 
   const category = categories.find((c) => c.id === product.category);
   const relatedProducts = products
@@ -97,7 +108,7 @@ export default function ProductPage() {
             <span>متوافق مع: {product.compatible}</span>
           </div>
 
-          {/* Price & CTA */}
+          {/* Price */}
           <div className="flex items-center gap-5 mb-4">
             <div className="flex items-baseline gap-2">
               <span className="text-3xl font-bold text-gray-900">{product.price} {currency}</span>
@@ -112,35 +123,12 @@ export default function ProductPage() {
             )}
           </div>
 
-          <div className="flex gap-3">
-            <button
-              onClick={() => addToCart(product)}
-              disabled={inCart}
-              className={`flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-semibold transition-all ${
-                inCart
-                  ? "bg-emerald-100 text-emerald-700 cursor-default"
-                  : "bg-gray-900 text-white hover:bg-gray-700"
-              }`}
-            >
-              {inCart ? (
-                <><Download size={16} /> تمت الإضافة للسلة</>
-              ) : (
-                <><ShoppingCart size={16} /> أضف للسلة</>
-              )}
-            </button>
-            {inCart && (
-              <Link
-                href="/cart"
-                className="flex items-center gap-2 border border-gray-200 text-gray-700 hover:border-gray-400 px-5 py-3.5 rounded-xl text-sm font-medium transition-all"
-              >
-                عرض السلة
-              </Link>
-            )}
-          </div>
+          {/* Cart button — client island */}
+          <ProductCartButton product={product} />
 
           <p className="text-xs text-gray-400 mt-3 flex items-center gap-1.5">
             <Download size={12} />
-            تحميل فوري بعد الدفع · دفع آمن عبر Moyasar
+            تحميل فوري بعد الدفع · دفع آمن عبر Paymob
           </p>
         </div>
       </div>
