@@ -8,9 +8,47 @@ const MarketingBanner = dynamic(() => import("@/components/MarketingBanner"));
 
 const featuredProducts = products.filter((p) => featuredProductIds.includes(p.id));
 
+export const metadata = {
+  title: "قوالب إكسل احترافية بالعربي للأعمال السعودية",
+  description: `${products.length} قالب إكسل احترافي بالعربي — ميزانية شخصية، تحليل استثمار وأسهم تداول، إدارة عقارات، مطاعم، أعمال وأكثر. تحميل فوري بعد الشراء الآمن.`,
+  alternates: { canonical: "/" },
+};
+
+const BASE = "https://seedaal.store";
+
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "سيدال",
+  alternateName: "Seedaal",
+  url: BASE,
+  email: "hello@seedaal.com",
+  description: "منصة سعودية متخصصة في قوالب وأدوات إكسل الاحترافية بالعربي للأعمال والأفراد",
+  foundingDate: "2024",
+  inLanguage: "ar-SA",
+  areaServed: { "@type": "Country", name: "Saudi Arabia" },
+  knowsLanguage: "ar",
+};
+
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "سيدال",
+  alternateName: "Seedaal",
+  url: BASE,
+  inLanguage: "ar-SA",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: { "@type": "EntryPoint", urlTemplate: `${BASE}/products?q={search_term_string}` },
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export default function HomePage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }} />
       {/* Hero */}
       <section className="relative overflow-hidden bg-white pt-16 pb-20 px-4 sm:px-6">
         <div className="absolute inset-0 pointer-events-none">

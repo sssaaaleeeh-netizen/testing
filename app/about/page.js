@@ -3,6 +3,7 @@ import { ArrowLeft, Target, Heart, Award } from "lucide-react";
 
 export const metadata = {
   title: "من نحن",
+  description: "سيدال — منصة سعودية متخصصة في قوالب وأدوات إكسل الاحترافية بالعربي. نساعد الأفراد والشركات في المملكة العربية السعودية على إدارة أموالهم وأعمالهم بكفاءة.",
   alternates: { canonical: "/about" },
 };
 

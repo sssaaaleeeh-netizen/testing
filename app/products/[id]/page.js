@@ -49,6 +49,47 @@ export default async function ProductPage({ params }) {
     ],
   };
 
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: `ما الذي يشمله ${product.name}؟`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: product.features.join("، ") + ".",
+        },
+      },
+      {
+        "@type": "Question",
+        name: `مع أي إصدارات إكسل يعمل ${product.name}؟`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${product.name} متوافق مع ${product.compatible}.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `لمن يناسب ${product.name}؟`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: product.audience
+            ? `${product.name} مناسب لـ: ${product.audience}.`
+            : `${product.name} مناسب للأفراد والشركات الذين يحتاجون حلاً جاهزاً ومنظماً دون الحاجة لبناء معادلات من الصفر.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: "كيف أحصل على الملف بعد الشراء؟",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "بعد إتمام الدفع الآمن، يمكنك تحميل ملف إكسل فوراً من صفحة التأكيد. الملف بصيغة .xlsx يعمل على جميع إصدارات إكسل المدعومة.",
+        },
+      },
+    ],
+  };
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -76,6 +117,7 @@ export default async function ProductPage({ params }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       {/* Breadcrumb */}

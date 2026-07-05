@@ -11,12 +11,16 @@ const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", we
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "https://seedaal.store"),
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    languages: { "ar-SA": "https://seedaal.store" },
+  },
   title: {
-    default: "سيدال | أدوات إكسل الاحترافية",
+    default: "سيدال | قوالب إكسل احترافية بالعربي للأعمال السعودية",
     template: "%s | سيدال",
   },
-  description: "حمّل أدوات إكسل الاحترافية للأعمال بالعربي: مخططات الميزانية، تحليل الاستثمار، إدارة العقارات، أدوات الأعمال والمزيد.",
+  description: "قوالب وأدوات إكسل احترافية بالعربي مصممة للسوق السعودي — ميزانية شخصية، تحليل استثمار، إدارة عقارات، أعمال ومطاعم. تحميل فوري بعد الشراء.",
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
   verification: {
     google: "ykK1XuNLjqTWFWbVkFnx3O43RpAv0wekYAimLtQ1ER4",
   },
@@ -24,13 +28,18 @@ export const metadata = {
     type: "website",
     locale: "ar_SA",
     siteName: "سيدال",
-    title: "سيدال | أدوات إكسل الاحترافية",
-    description: "حمّل أدوات إكسل الاحترافية للأعمال بالعربي — تحميل فوري بعد الشراء.",
+    title: "سيدال | قوالب إكسل احترافية بالعربي",
+    description: "قوالب إكسل احترافية بالعربي للسوق السعودي — تحميل فوري بعد الشراء.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "سيدال | أدوات إكسل الاحترافية",
-    description: "حمّل أدوات إكسل الاحترافية للأعمال بالعربي — تحميل فوري بعد الشراء.",
+    title: "سيدال | قوالب إكسل احترافية بالعربي",
+    description: "قوالب إكسل احترافية بالعربي للسوق السعودي — تحميل فوري بعد الشراء.",
+  },
+  other: {
+    "geo.region": "SA",
+    "geo.placename": "Saudi Arabia",
+    "content-language": "ar-SA",
   },
 };
 

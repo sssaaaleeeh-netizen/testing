@@ -12,6 +12,21 @@ const breadcrumbLd = {
   ],
 };
 
+const itemListLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "قوالب إكسل احترافية بالعربي — سيدال",
+  url: `${BASE}/products`,
+  numberOfItems: products.length,
+  itemListElement: products.map((p, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: p.name,
+    url: `${BASE}/products/${p.id}`,
+    description: p.description,
+  })),
+};
+
 export const metadata = {
   title: "جميع أدوات إكسل",
   description: `تصفّح ${products.length} أداة إكسل احترافية بالعربي — مخططات الميزانية، تحليل الاستثمار، إدارة الأعمال، العقارات وأكثر. تحميل فوري بعد الشراء.`,
@@ -27,6 +42,7 @@ export default function ProductsPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14">
         <div className="mb-10">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">جميع أدوات إكسل</h1>
