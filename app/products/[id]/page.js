@@ -9,16 +9,16 @@ import ProductCartButton from "@/components/ProductCartButton";
 export async function generateMetadata({ params }) {
   const { id } = await params;
   const product = getProductById(id);
-  if (!product) return { title: "المنتج غير موجود — سيدال" };
+  if (!product) return { title: "المنتج غير موجود" };
+
+  const rawDesc = product.longDescription || product.description;
+  const description = rawDesc.length > 150 ? rawDesc.slice(0, 149).trimEnd() + "…" : rawDesc;
 
   return {
-    title: `${product.name} — سيدال`,
-    description: product.longDescription || product.description,
-    openGraph: {
-      title: product.name,
-      description: product.longDescription || product.description,
-      type: "website",
-    },
+    title: product.name,
+    description,
+    openGraph: { title: product.name, description, type: "website" },
+    twitter: { title: product.name, description },
   };
 }
 

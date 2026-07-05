@@ -9,21 +9,20 @@ const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", we
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "https://seedaal.com"),
   title: {
-    default: "سيدال — أدوات إكسل الاحترافية",
-    template: "%s — سيدال",
+    default: "سيدال | أدوات إكسل الاحترافية",
+    template: "%s | سيدال",
   },
   description: "حمّل أدوات إكسل الاحترافية للأعمال بالعربي: مخططات الميزانية، تحليل الاستثمار، إدارة العقارات، أدوات الأعمال والمزيد.",
-  keywords: "قوالب اكسل, ادوات اكسل, نماذج اعمال, تحميل اكسل, مخطط ميزانية, تحليل استثمار, سيدال",
   openGraph: {
     type: "website",
     locale: "ar_SA",
     siteName: "سيدال",
-    title: "سيدال — أدوات إكسل الاحترافية",
+    title: "سيدال | أدوات إكسل الاحترافية",
     description: "حمّل أدوات إكسل الاحترافية للأعمال بالعربي — تحميل فوري بعد الشراء.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "سيدال — أدوات إكسل الاحترافية",
+    title: "سيدال | أدوات إكسل الاحترافية",
     description: "حمّل أدوات إكسل الاحترافية للأعمال بالعربي — تحميل فوري بعد الشراء.",
   },
 };

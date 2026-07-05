@@ -2,10 +2,10 @@ import ProductsFilter from "@/components/ProductsFilter";
 import { products, categories } from "@/lib/products";
 
 export const metadata = {
-  title: "جميع أدوات إكسل — سيدال",
-  description: `${products.length} أداة إكسل احترافية بالعربي — مخططات الميزانية، تحليل الاستثمار، إدارة الأعمال، العقارات وأكثر. تحميل فوري بعد الشراء.`,
+  title: "جميع أدوات إكسل",
+  description: `تصفّح ${products.length} أداة إكسل احترافية بالعربي — مخططات الميزانية، تحليل الاستثمار، إدارة الأعمال، العقارات وأكثر. تحميل فوري بعد الشراء.`,
   openGraph: {
-    title: "جميع أدوات إكسل — سيدال",
+    title: "جميع أدوات إكسل | سيدال",
     description: `${products.length} أداة إكسل احترافية بالعربي — تحميل فوري بعد الشراء.`,
     type: "website",
   },

@@ -1,4 +1,4 @@
-export const metadata = { title: "سياسة الاسترجاع — سيدال" };
+export const metadata = { title: "سياسة الاسترجاع" };
 
 export default function RefundPage() {
   return (

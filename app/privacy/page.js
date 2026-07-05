@@ -1,4 +1,4 @@
-export const metadata = { title: "سياسة الخصوصية — سيدال" };
+export const metadata = { title: "سياسة الخصوصية" };
 
 export default function PrivacyPage() {
   return (

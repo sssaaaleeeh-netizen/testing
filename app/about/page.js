@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, Target, Heart, Award } from "lucide-react";
 
 export const metadata = {
-  title: "من نحن — سيدال",
+  title: "من نحن",
 };
 
 export default function AboutPage() {

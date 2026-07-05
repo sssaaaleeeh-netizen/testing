@@ -1,4 +1,4 @@
-export const metadata = { title: "شروط الخدمة — سيدال" };
+export const metadata = { title: "شروط الخدمة" };
 
 export default function TermsPage() {
   return (
