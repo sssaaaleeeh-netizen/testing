@@ -28,7 +28,7 @@ export async function POST(req) {
 
     return NextResponse.json({ url });
   } catch (err) {
-    console.error("Checkout error:", err);
-    return NextResponse.json({ error: "حدث خطأ في الدفع" }, { status: 500 });
+    console.error("Checkout error:", err?.message || err);
+    return NextResponse.json({ error: "حدث خطأ في الدفع", detail: err?.message }, { status: 500 });
   }
 }
