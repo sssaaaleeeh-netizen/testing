@@ -94,7 +94,7 @@ export default function CartPage() {
             </Link>
             <div className="mt-5 flex items-center justify-center gap-1.5 text-xs text-gray-400">
               <Shield size={12} />
-              دفع آمن · Moyasar
+              دفع آمن · MyFatoorah
             </div>
           </div>
         </div>

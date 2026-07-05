@@ -67,7 +67,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-200 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-gray-400">© {new Date().getFullYear()} سيدال. جميع الحقوق محفوظة.</p>
-          <p className="text-xs text-gray-400">مدفوعات آمنة عبر Moyasar 🔒</p>
+          <p className="text-xs text-gray-400">مدفوعات آمنة عبر MyFatoorah 🔒</p>
         </div>
       </div>
     </footer>
