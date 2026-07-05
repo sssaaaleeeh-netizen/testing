@@ -7,7 +7,7 @@ import { CartProvider } from "@/context/CartContext";
 
 const GA_ID = "G-LDZT6WRSN1";
 
-const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", weight: ["400", "500", "600", "700", "800"] });
+const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", weight: ["400", "600", "700", "800"] });
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "https://seedaal.store"),

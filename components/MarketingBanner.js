@@ -68,6 +68,7 @@ export default function MarketingBanner() {
           width: fit-content;
           direction: ltr;
           animation: bannerScroll 40s linear infinite;
+          will-change: transform;
         }
         .banner-row:hover .banner-track {
           animation-play-state: paused;

@@ -1,5 +1,3 @@
-"use client";
-
 const baseCard = {
   position: "absolute", inset: 0, overflow: "hidden",
   display: "flex", flexDirection: "column",

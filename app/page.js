@@ -1,8 +1,10 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ArrowLeft, Download, Shield, Zap, Users, Star, ChevronLeft } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
-import MarketingBanner from "@/components/MarketingBanner";
 import { products, categories, featuredProductIds } from "@/lib/products";
+
+const MarketingBanner = dynamic(() => import("@/components/MarketingBanner"));
 
 const featuredProducts = products.filter((p) => featuredProductIds.includes(p.id));
 
