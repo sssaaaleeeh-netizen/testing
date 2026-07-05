@@ -1,8 +1,11 @@
 import { Cairo } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
+
+const GA_ID = "G-LDZT6WRSN1";
 
 const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", weight: ["400", "500", "600", "700", "800"] });
 
@@ -34,6 +37,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl" className={cairo.variable}>
       <body className="font-sans bg-white text-gray-900 antialiased">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
         <CartProvider>
           <Navbar />
           <main className="min-h-screen">{children}</main>
