@@ -36,7 +36,7 @@ export default async function ProductPage({ params }) {
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 3);
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://seedaal.com";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://seedaal.store";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",

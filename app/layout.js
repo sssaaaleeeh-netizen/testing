@@ -7,7 +7,7 @@ import { CartProvider } from "@/context/CartContext";
 const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", weight: ["400", "500", "600", "700", "800"] });
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "https://seedaal.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "https://seedaal.store"),
   title: {
     default: "سيدال | أدوات إكسل الاحترافية",
     template: "%s | سيدال",
