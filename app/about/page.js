@@ -3,6 +3,7 @@ import { ArrowLeft, Target, Heart, Award } from "lucide-react";
 
 export const metadata = {
   title: "من نحن",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

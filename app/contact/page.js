@@ -2,6 +2,7 @@ import { Mail, MessageSquare, Clock } from "lucide-react";
 
 export const metadata = {
   title: "تواصل معنا",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

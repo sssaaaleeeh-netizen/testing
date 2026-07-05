@@ -1,4 +1,4 @@
-export const metadata = { title: "سياسة الاسترجاع" };
+export const metadata = { title: "سياسة الاسترجاع", alternates: { canonical: "/refund" } };
 
 export default function RefundPage() {
   return (

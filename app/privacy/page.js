@@ -1,4 +1,4 @@
-export const metadata = { title: "سياسة الخصوصية" };
+export const metadata = { title: "سياسة الخصوصية", alternates: { canonical: "/privacy" } };
 
 export default function PrivacyPage() {
   return (

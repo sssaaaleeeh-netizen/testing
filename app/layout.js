@@ -11,6 +11,7 @@ const cairo = Cairo({ subsets: ["arabic", "latin"], variable: "--font-cairo", we
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "https://seedaal.store"),
+  alternates: { canonical: "/" },
   title: {
     default: "سيدال | أدوات إكسل الاحترافية",
     template: "%s | سيدال",
