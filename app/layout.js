@@ -13,6 +13,9 @@ export const metadata = {
     template: "%s | سيدال",
   },
   description: "حمّل أدوات إكسل الاحترافية للأعمال بالعربي: مخططات الميزانية، تحليل الاستثمار، إدارة العقارات، أدوات الأعمال والمزيد.",
+  verification: {
+    google: "ykK1XuNLjqTWFWbVkFnx3O43RpAv0wekYAimLtQ1ER4",
+  },
   openGraph: {
     type: "website",
     locale: "ar_SA",
