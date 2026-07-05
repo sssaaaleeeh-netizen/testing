@@ -38,6 +38,17 @@ export default async function ProductPage({ params }) {
     .slice(0, 3);
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://seedaal.store";
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "الرئيسية", item: `${baseUrl}/` },
+      { "@type": "ListItem", position: 2, name: "الأدوات",   item: `${baseUrl}/products` },
+      { "@type": "ListItem", position: 3, name: product.name, item: `${baseUrl}/products/${product.id}` },
+    ],
+  };
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -64,6 +75,7 @@ export default async function ProductPage({ params }) {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       {/* Breadcrumb */}
