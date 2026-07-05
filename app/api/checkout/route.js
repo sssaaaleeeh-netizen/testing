@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { createCheckoutUrl } from "@/lib/paymob";
+import { createCheckoutUrl } from "@/lib/myfatoorah";
+import { getProductById } from "@/lib/products";
 
 export async function POST(req) {
   try {
@@ -11,11 +12,17 @@ export async function POST(req) {
 
     const totalSAR = items.reduce((sum, item) => sum + item.price, 0);
     const productIds = items.map((i) => i.id).join(",");
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://seedaal.store";
+
+    const enrichedItems = items.map((item) => {
+      const product = getProductById(item.id);
+      return { name: product?.name || item.id, price: item.price };
+    });
 
     const url = await createCheckoutUrl({
       amountSAR: totalSAR,
       productIds,
+      items: enrichedItems,
       callbackUrl: `${baseUrl}/success`,
     });
 
