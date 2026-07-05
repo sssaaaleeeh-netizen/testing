@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
     title: product.name,
     description,
     openGraph: { title: product.name, description, type: "website" },
-    twitter: { title: product.name, description },
+    twitter: { card: "summary_large_image", title: product.name, description },
   };
 }
 
@@ -36,8 +36,35 @@ export default async function ProductPage({ params }) {
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 3);
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://seedaal.com";
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    sku: product.id,
+    brand: { "@type": "Brand", name: "سيدال" },
+    url: `${baseUrl}/products/${product.id}`,
+    offers: {
+      "@type": "Offer",
+      price: String(product.price),
+      priceCurrency: "SAR",
+      availability: "https://schema.org/InStock",
+      url: `${baseUrl}/products/${product.id}`,
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: String(product.rating),
+      reviewCount: String(product.reviews),
+      bestRating: "5",
+      worstRating: "1",
+    },
+  };
+
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1.5 text-xs text-gray-400 mb-8">
         <Link href="/" className="hover:text-gray-700 transition-colors">الرئيسية</Link>
@@ -145,5 +172,6 @@ export default async function ProductPage({ params }) {
         </div>
       )}
     </div>
+    </>
   );
 }
