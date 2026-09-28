@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createCheckoutUrl } from "@/lib/myfatoorah";
+import { createCheckoutUrl } from "@/lib/paymob";
 
 export async function POST(req) {
   try {
@@ -21,10 +21,7 @@ export async function POST(req) {
 
     return NextResponse.json({ url });
   } catch (err) {
-    console.error("Checkout error:", err?.message || err);
-    return NextResponse.json(
-      { error: "حدث خطأ في الدفع", detail: err?.message },
-      { status: 500 }
-    );
+    console.error("Checkout error:", err);
+    return NextResponse.json({ error: "حدث خطأ في الدفع" }, { status: 500 });
   }
 }
